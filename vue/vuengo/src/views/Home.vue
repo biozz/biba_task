@@ -35,7 +35,7 @@
         <div class="todo">
           <div
             class="card"
-            v-for="task in getTodoSatus"
+            v-for="task in getTasksByStatus('todo')"
             :key="task.id"
           >
             <div class="card-content">{{ task.description }}</div>
@@ -54,7 +54,7 @@
         <div class="done">
           <div
             class="card"
-            v-for="task in getDoneSatus"
+            v-for="task in getTasksByStatus('done')"
             :key="task.id"
           >
             <div class="card-content">{{ task.description }}</div>
@@ -129,17 +129,10 @@ export default {
       }).catch((error) => {
         console.log(error)
       })
-    }
-  },
-  computed: {
-    getTodoSatus: function () {
-      return this.tasks.filter(function (task) {
-        return task.status === 'todo'
-      })
     },
-    getDoneSatus: function () {
+    getTasksByStatus(status) {
       return this.tasks.filter(function (task) {
-        return task.status === 'done'
+        return task.status === status
       })
     }
   }
